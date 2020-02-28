@@ -1,5 +1,6 @@
 package com.learning.springdemo;
 
+import com.learning.springdemo.web.HomeController;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
