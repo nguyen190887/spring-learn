@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -13,5 +14,9 @@ public class Taco {
     private String name;
 
     @Size(min=1, message = "At least 1 ingredient must be selected")
-    private List<String> ingredients;
+    private List<Ingredient> ingredients;
+
+    private Date createdAt;
+
+    private long id;
 }
