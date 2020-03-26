@@ -1,0 +1,37 @@
+logging:
+  path: /var/logs/
+  file: TacoCloud.log
+  level:
+    root: WARN
+    # customize level
+    org:
+      springframework:
+        security: DEBUG
+    # customize level - collapse package name
+    org.springframework.security: DEBUG
+
+server:
+  port: 8443
+  ssl:
+    key-store: file:///path/to/mykeys.jks
+    key-store-password: letmein
+    key-password: letmein
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/tacocloud
+    username: tacodb
+    password: tacopassword
+    driver-class-name: com.mysql.jdbc.Driver # usually we DONT need this
+
+    # SCHEMA & DATA
+    schema:
+      - order-schema.sql
+      - ingredient-schema.sql
+      - taco-schema.sql
+      - user-schema.sql
+    data:
+      - ingredients.sql
+
+    # JNDI
+    jndi-name: java:/comp/env/jdbc/tacoCloudDS # others are IGNORED when setting this
