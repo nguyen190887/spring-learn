@@ -35,3 +35,7 @@ spring:
 
     # JNDI
     jndi-name: java:/comp/env/jdbc/tacoCloudDS # others are IGNORED when setting this
+
+taco:
+  orders:
+    pageSize: 10
