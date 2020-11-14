@@ -2,12 +2,10 @@ package com.learning.springdemo.web;
 
 import com.learning.springdemo.Taco;
 import com.learning.springdemo.data.TacoRepository;
-import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +36,7 @@ public class RestDesignTacoController {
                 0, 12, Sort.by(("createdAt")).descending());
         List<Taco> tacos = tacoRepo.findAll(page).getContent();
 
-        var recentResources = new TacoModelAssembler().toCollectionModel(tacos);
+        CollectionModel<TacoModel> recentResources = new TacoModelAssembler().toCollectionModel(tacos);
 
 //        CollectionModel<EntityModel<Taco>> recentResources = CollectionModel.wrap(tacos);
 //        recentResources.add(
@@ -47,7 +45,7 @@ public class RestDesignTacoController {
 //                        .withRel("recents"));
         recentResources.add(
                 linkTo(methodOn(RestDesignTacoController.class).recentTacos())
-                .withRel("recents"));
+                        .withRel("recents"));
         return recentResources;
     }
 
