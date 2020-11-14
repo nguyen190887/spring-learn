@@ -23,20 +23,20 @@ public class Order implements Serializable {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private long id;
 
-    @NotBlank(message = "Nam is required")
-    private String name;
+    @NotBlank(message = "Delivery name is required")
+    private String deliveryName;
 
     @NotBlank(message = "Street is required")
-    private String street;
+    private String deliveryStreet;
 
     @NotBlank(message = "City is required")
-    private String city;
+    private String deliveryCity;
 
     @NotBlank(message = "State is required")
-    private String state;
+    private String deliveryState;
 
     @NotBlank(message = "Zip code is required")
-    private String zip;
+    private String deliveryZip;
 
     @CreditCardNumber(message = "Not valid cc number")
     private String ccNumber;
