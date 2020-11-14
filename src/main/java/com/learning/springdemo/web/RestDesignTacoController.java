@@ -2,6 +2,7 @@ package com.learning.springdemo.web;
 
 import com.learning.springdemo.Taco;
 import com.learning.springdemo.data.TacoRepository;
+import lombok.var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -31,14 +32,15 @@ public class RestDesignTacoController {
         this.tacoRepo = tacoRepo;
     }
 
-    //FIXME - got SQL error: Column "TACO0_.CREATED_AT" not found
     @GetMapping("/recent")
-    public CollectionModel<EntityModel<Taco>> recentTacos() {
+    public CollectionModel<TacoModel> recentTacos() {
         PageRequest page = PageRequest.of(
                 0, 12, Sort.by(("createdAt")).descending());
         List<Taco> tacos = tacoRepo.findAll(page).getContent();
 
-        CollectionModel<EntityModel<Taco>> recentResources = CollectionModel.wrap(tacos);
+        var recentResources = new TacoModelAssembler().toCollectionModel(tacos);
+
+//        CollectionModel<EntityModel<Taco>> recentResources = CollectionModel.wrap(tacos);
 //        recentResources.add(
 //                ControllerLinkBuilder.linkTo(RestDesignTacoController.class)
 //                        .slash("recent")
