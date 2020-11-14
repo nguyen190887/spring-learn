@@ -7,7 +7,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping(path = "/api/design", produces = "application/json")
@@ -37,7 +39,13 @@ public class RestDesignTacoController {
         List<Taco> tacos = tacoRepo.findAll(page).getContent();
 
         CollectionModel<EntityModel<Taco>> recentResources = CollectionModel.wrap(tacos);
-        recentResources.add(new Link("http://localhost:8080/api/design/recent", "recents"));
+//        recentResources.add(
+//                ControllerLinkBuilder.linkTo(RestDesignTacoController.class)
+//                        .slash("recent")
+//                        .withRel("recents"));
+        recentResources.add(
+                linkTo(methodOn(RestDesignTacoController.class).recentTacos())
+                .withRel("recents"));
         return recentResources;
     }
 
