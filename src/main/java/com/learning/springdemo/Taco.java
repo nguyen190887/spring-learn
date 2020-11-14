@@ -16,13 +16,14 @@ public class Taco {
     private Long id;
 
     @NotNull
-    @Size(min=5, message = "Name must be at least 5 characters long")
+    @Size(min = 5, message = "Name must be at least 5 characters long")
     private String name;
 
     @ManyToMany(targetEntity = Ingredient.class)
-    @Size(min=1, message = "At least 1 ingredient must be selected")
+    @Size(min = 1, message = "At least 1 ingredient must be selected")
     private List<Ingredient> ingredients;
 
+    @Column(name="createdAt")
     private Date createdAt;
 
     @PrePersist
