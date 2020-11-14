@@ -2,11 +2,9 @@ package com.learning.springdemo.web;
 
 import com.learning.springdemo.Taco;
 import com.learning.springdemo.data.TacoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,9 +21,6 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class RestDesignTacoController {
     private TacoRepository tacoRepo;
 
-    @Autowired
-    EntityLinks entityLinks;
-
     public RestDesignTacoController(TacoRepository tacoRepo) {
         this.tacoRepo = tacoRepo;
     }
@@ -37,12 +32,6 @@ public class RestDesignTacoController {
         List<Taco> tacos = tacoRepo.findAll(page).getContent();
 
         CollectionModel<TacoModel> recentResources = new TacoModelAssembler().toCollectionModel(tacos);
-
-//        CollectionModel<EntityModel<Taco>> recentResources = CollectionModel.wrap(tacos);
-//        recentResources.add(
-//                ControllerLinkBuilder.linkTo(RestDesignTacoController.class)
-//                        .slash("recent")
-//                        .withRel("recents"));
         recentResources.add(
                 linkTo(methodOn(RestDesignTacoController.class).recentTacos())
                         .withRel("recents"));
