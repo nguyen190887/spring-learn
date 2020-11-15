@@ -4,9 +4,11 @@ import com.learning.springdemo.Taco;
 import lombok.Getter;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.RepresentationModel;
+import org.springframework.hateoas.server.core.Relation;
 
 import java.util.Date;
 
+@Relation(value = "taco", collectionRelation = "tacos")
 public class TacoModel extends RepresentationModel<Taco> {
     private final IngredientModelAssembler ingredientAssembler = new IngredientModelAssembler();
 

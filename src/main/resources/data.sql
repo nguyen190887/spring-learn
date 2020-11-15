@@ -24,3 +24,15 @@ insert into Ingredient (id, name, type)
     values ('SLSA', 'Salsa', 'SAUCE');
 insert into Ingredient (id, name, type)
     values ('SRCR', 'Sour Cream', 'SAUCE');
+
+insert into Taco (id, name, createdAt)
+    values (1, 'Taco 1', '2020-01-01' );
+insert into Taco (id, name, createdAt)
+    values (2, 'Taco 2', '2020-01-01' );
+
+insert into Taco_Ingredients (taco, ingredient)
+    values (1, 'FLTO');
+insert into Taco_Ingredients (taco, ingredient)
+    values (1, 'CARN');
+insert into Taco_Ingredients (taco, ingredient)
+    values (2, 'JACK');
